@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShinyDate", "ShinyDate\ShinyDate.csproj", "{3A3A6116-0658-489C-B2EC-8FA49AF29989}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShinyDate_Test", "ShinyDate_Test\ShinyDate_Test.csproj", "{3DEFC0F5-F0DE-4106-97FF-FB21654A061F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A3A6116-0658-489C-B2EC-8FA49AF29989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3A6116-0658-489C-B2EC-8FA49AF29989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3A6116-0658-489C-B2EC-8FA49AF29989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3A6116-0658-489C-B2EC-8FA49AF29989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEFC0F5-F0DE-4106-97FF-FB21654A061F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEFC0F5-F0DE-4106-97FF-FB21654A061F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEFC0F5-F0DE-4106-97FF-FB21654A061F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEFC0F5-F0DE-4106-97FF-FB21654A061F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
