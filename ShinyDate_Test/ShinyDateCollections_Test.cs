@@ -23,7 +23,7 @@ namespace ShinyDate_Test
                 new DateTime(2014, 2, 14)
             };
 
-            var result = ShinyDateCollections.GetAllDaysBetween(expectedDates[0], expectedDates[expectedDates.Count - 1]).ToList();
+            var result = ShinyDateCollections.GetAllDaysBetween(new DateTime(2014, 2, 8), new DateTime(2014, 2, 14)).ToList();
 
             CollectionAssert.AreEquivalent(expectedDates, result);
         }
@@ -31,7 +31,18 @@ namespace ShinyDate_Test
         [TestMethod]
         public void GetAllDaysBetween_Exclusive()
         {
-            Assert.Fail("test not implemented");
+            var expectedDates = new List<DateTime>
+            {
+                new DateTime(2014, 2, 9),
+                new DateTime(2014, 2, 10),
+                new DateTime(2014, 2, 11),
+                new DateTime(2014, 2, 12),
+                new DateTime(2014, 2, 13)
+            };
+
+            var result = ShinyDateCollections.GetAllDaysBetween(new DateTime(2014, 2, 8), new DateTime(2014, 2, 14), inclusive: false).ToList();
+
+            CollectionAssert.AreEquivalent(expectedDates, result);
         }
     }
 }

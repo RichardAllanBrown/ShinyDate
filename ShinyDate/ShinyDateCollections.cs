@@ -10,11 +10,21 @@ namespace ShinyDate.Collections
     {
         public static IEnumerable<DateTime> GetAllDaysBetween(DateTime from, DateTime to, bool inclusive = true)
         {
-            yield return from;
+            if (inclusive)
+            {
+                yield return from;
+            }
+
+            from = from.GetTomorrow();
 
             while (from < to)
             {
+                yield return from;
                 from = from.GetTomorrow();
+            }
+
+            if (inclusive)
+            {
                 yield return from;
             }
         }
