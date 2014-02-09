@@ -48,9 +48,16 @@ namespace ShinyDate
             return from.AddMonths(1).AddDays(1 - from.Day);
         }
 
-        public static DateTime GetFirstOfNextOfMonth(this DateTime from, DayOfWeek day)
+        public static DateTime GetFirstOfNextMonth(this DateTime from, DayOfWeek day)
         {
-            return from.GetFirstOfNextMonth().GetNext(day);
+            var firstOfNextMonth = from.GetFirstOfNextMonth();
+
+            if (firstOfNextMonth.DayOfWeek == day)
+            {
+                return firstOfNextMonth;
+            }
+
+            return firstOfNextMonth.GetNext(day);
         }
 
         public static DateTime GetLastOfNextMonth(this DateTime from)

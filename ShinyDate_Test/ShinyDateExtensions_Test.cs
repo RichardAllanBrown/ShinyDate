@@ -93,9 +93,17 @@ namespace ShinyDate_Test
         {
             DateTime testDate = new DateTime(2014, 2, 8);
 
-            var result = testDate.GetFirstOfNextOfMonth(DayOfWeek.Thursday);
+            var result = testDate.GetFirstOfNextMonth(DayOfWeek.Thursday);
 
             Assert.AreEqual(new DateTime(2014, 3, 6), result);
+        }
+
+        [TestMethod]
+        public void GetFirstOfNextMonth_SpecificDayIsFirst()
+        {
+            var result = new DateTime(2014, 2, 8).GetFirstOfNextMonth(DayOfWeek.Saturday);
+
+            Assert.AreEqual(new DateTime(2014, 3, 1), result);
         }
 
         [TestMethod]
