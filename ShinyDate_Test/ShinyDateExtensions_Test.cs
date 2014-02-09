@@ -107,6 +107,22 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
+        public void GetFirstWorkingDayOfNextMonth_FirstDayIsNotWorkingDay()
+        {
+            var result = new DateTime(2014, 2, 8).GetFirstWorkingDayOfNextMonth();
+
+            Assert.AreEqual(new DateTime(2014, 3, 3), result);
+        }
+
+        [TestMethod]
+        public void GetFirstWorkingDayOfNextMonth_FirstDayIsWorkingDay()
+        {
+            var result = new DateTime(2014, 3, 8).GetFirstWorkingDayOfNextMonth();
+
+            Assert.AreEqual(new DateTime(2014, 4, 1), result);
+        }
+
+        [TestMethod]
         public void GetLastOfNextMonth()
         {
             DateTime testDate = new DateTime(2014, 2, 8);
@@ -134,6 +150,22 @@ namespace ShinyDate_Test
             var result = testDate.GetLastOfNextMonth(DayOfWeek.Monday);
 
             Assert.AreEqual(new DateTime(2014, 3, 31), result);
+        }
+
+        [TestMethod]
+        public void GetLastWorkingDayOfMonth_LastIsWorkingDay()
+        {
+            var result = new DateTime(2014, 2, 8).GetLastWorkingDayOfNextMonth();
+
+            Assert.AreEqual(new DateTime(2014, 3, 31), result);
+        }
+
+        [TestMethod]
+        public void GetLastWorkingDayOfMonth_LastIsNotWorkingDay()
+        {
+            var result = new DateTime(2014, 4, 8).GetLastWorkingDayOfNextMonth();
+
+            Assert.AreEqual(new DateTime(2014, 5, 30), result);
         }
 
         [TestMethod]

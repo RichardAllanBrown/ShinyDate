@@ -60,6 +60,18 @@ namespace ShinyDate
             return firstOfNextMonth.GetNext(day);
         }
 
+        public static DateTime GetFirstWorkingDayOfNextMonth(this DateTime from)
+        {
+            var firstOfNextMonth = from.GetFirstOfNextMonth();
+
+            if (firstOfNextMonth.IsWeekday())
+            {
+                return firstOfNextMonth;
+            }
+
+            return firstOfNextMonth.AddWorkingDays(1);
+        }
+
         public static DateTime GetLastOfNextMonth(this DateTime from)
         {
             return from.AddMonths(2).AddDays(-from.Day);
@@ -75,6 +87,18 @@ namespace ShinyDate
             }
 
             return lastDayOfNextMonth.GetPrevious(day);
+        }
+
+        public static DateTime GetLastWorkingDayOfNextMonth(this DateTime from)
+        {
+            var lastOfNextMonth = from.GetLastOfNextMonth();
+
+            if (lastOfNextMonth.IsWeekday())
+            {
+                return lastOfNextMonth;
+            }
+
+            return lastOfNextMonth.SubtractWorkingDays(1);
         }
 
         public static DateTime AddWorkingDays(this DateTime from, int daysToAdd)
