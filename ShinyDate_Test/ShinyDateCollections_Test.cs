@@ -10,7 +10,7 @@ namespace ShinyDate_Test
     public class ShinyDateCollections_Test
     {
         [TestMethod]
-        public void GetAllDaysBetween_Inclusive()
+        public void GetAllDaysBetween_GetsCorrectDays()
         {
             var expectedDates = new List<DateTime>
             {
@@ -29,20 +29,35 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
-        public void GetAllDaysBetween_Exclusive()
+        public void GetAllWorkingDaysBetween_GetsCorrectDays()
         {
             var expectedDates = new List<DateTime>
             {
-                new DateTime(2014, 2, 9),
                 new DateTime(2014, 2, 10),
                 new DateTime(2014, 2, 11),
                 new DateTime(2014, 2, 12),
-                new DateTime(2014, 2, 13)
+                new DateTime(2014, 2, 13),
+                new DateTime(2014, 2, 14),
+                new DateTime(2014, 2, 17)
             };
 
-            var result = ShinyDateCollections.GetAllDaysBetween(new DateTime(2014, 2, 8), new DateTime(2014, 2, 14), inclusive: false).ToList();
+            var result = ShinyDateCollections.GetAllWorkingDaysBetween(new DateTime(2014, 2, 8), new DateTime(2014, 2, 17)).ToList();
 
             CollectionAssert.AreEquivalent(expectedDates, result);
+        }
+
+        [TestMethod]
+        public void GetAllDayOfWeek_GetsCorrectDays()
+        {
+            var expectedDates = new List<DateTime>
+            {
+                new DateTime(2014, 2, 5),
+                new DateTime(2014, 2, 12),
+                new DateTime(2014, 2, 19),
+                new DateTime(2014, 2, 26)
+            };
+
+            var result = ShinyDateCollections.GetAllDayOfWeek(new DateTime(2014, 2, 4), new DateTime(2014, 2, 27), DayOfWeek.Wednesday).ToList();
         }
     }
 }

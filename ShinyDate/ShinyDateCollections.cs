@@ -4,29 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ShinyDate;
+
 namespace ShinyDate.Collections
 {
     public static class ShinyDateCollections
     {
-        public static IEnumerable<DateTime> GetAllDaysBetween(DateTime from, DateTime to, bool inclusive = true)
+        public static IEnumerable<DateTime> GetAllDaysBetween(DateTime from, DateTime to)
         {
-            if (inclusive)
-            {
-                yield return from;
-            }
-
-            from = from.GetTomorrow();
+            yield return from;
 
             while (from < to)
             {
-                yield return from;
                 from = from.GetTomorrow();
-            }
-
-            if (inclusive)
-            {
                 yield return from;
+                
             }
+        }
+
+        public static IEnumerable<DateTime> GetAllWorkingDaysBetween(DateTime from, DateTime to)
+        {
+            return GetAllDaysBetween(from, to).Where(x => x.IsWeekday());
+        }
+
+        public static IEnumerable<DateTime> GetAllDayOfWeek(DateTime from, DateTime to, DayOfWeek day)
+        {
+            return GetAllDaysBetween(from, to).Where(x => x.DayOfWeek == day);
         }
     }
 }

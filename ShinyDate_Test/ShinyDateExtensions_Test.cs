@@ -161,13 +161,13 @@ namespace ShinyDate_Test
         [TestMethod]
         public void GetMonthOfYear_Jan()
         {
-            Assert.AreEqual(MonthOfYear.January, new DateTime(2014, 1, 12).GetMonthOfYear());
+            Assert.AreEqual(MonthOfYear.January, new DateTime(2014, 1, 12).MonthOfYear());
         }
 
         [TestMethod]
         public void GetMonthOfYear_Dec()
         {
-            Assert.AreEqual(MonthOfYear.December, new DateTime(2014, 12, 25).GetMonthOfYear());
+            Assert.AreEqual(MonthOfYear.December, new DateTime(2014, 12, 25).MonthOfYear());
         }
 
         [TestMethod]

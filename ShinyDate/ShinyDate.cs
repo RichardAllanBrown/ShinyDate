@@ -93,7 +93,7 @@ namespace ShinyDate
             return from.AddWorkingDays(-daysToSubtract);
         }
 
-        public static MonthOfYear GetMonthOfYear(this DateTime of)
+        public static MonthOfYear MonthOfYear(this DateTime of)
         {
             return (MonthOfYear)of.Month;
         }
