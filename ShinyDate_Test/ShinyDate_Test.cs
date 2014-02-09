@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ShinyDate;
 
 namespace ShinyDate_Test
@@ -256,6 +257,30 @@ namespace ShinyDate_Test
         public void IsInLeapYear_DivisibleBy4And100NotBy400()
         {
             Assert.IsFalse(new DateTime(2100, 2, 4).IsInLeapYear());
+        }
+
+        [TestMethod]
+        public void IsOccurrenceOf_True()
+        {
+            Assert.IsTrue(new DateTime(2014, 2, 8).IsOccurrenceOf(DayOfWeek.Saturday, Occurrence.Second));
+        }
+
+        [TestMethod]
+        public void IsOccurrenceOf_False()
+        {
+            Assert.IsFalse(new DateTime(2014, 2, 8).IsOccurrenceOf(DayOfWeek.Saturday, Occurrence.Last));
+        }
+
+        [TestMethod]
+        public void IsOccurrenceOf_ImpossibleOcc()
+        {
+            Assert.IsFalse(new DateTime(2014, 2, 8).IsOccurrenceOf(DayOfWeek.Saturday, Occurrence.Fifth));
+        }
+
+        [TestMethod]
+        public void IsOccurrenceOf_WrongDay()
+        {
+            Assert.IsFalse(new DateTime(2014, 2, 8).IsOccurrenceOf(DayOfWeek.Tuesday, Occurrence.Second));
         }
     }
 }

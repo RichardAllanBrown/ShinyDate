@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShinyDate.Collections;
 using System.Linq;
+
+using ShinyDate.Collections;
 
 namespace ShinyDate_Test
 {
@@ -58,6 +59,24 @@ namespace ShinyDate_Test
             };
 
             var result = ShinyDateCollections.GetAllDayOfWeek(new DateTime(2014, 2, 4), new DateTime(2014, 2, 27), DayOfWeek.Wednesday).ToList();
+
+            CollectionAssert.AreEquivalent(expectedDates, result);
+        }
+
+        [TestMethod]
+        public void GetAllOccs_GetsCorrectDays()
+        {
+            var expectedDates = new List<DateTime>
+            {
+                new DateTime(2014, 2, 11),
+                new DateTime(2014, 3, 11),
+                new DateTime(2014, 4, 8),
+                new DateTime(2014, 5, 13)
+            };
+
+            var result = ShinyDateCollections.GetAllOccurrences(new DateTime(2014, 2, 1), new DateTime(2014, 6, 6), DayOfWeek.Tuesday, ShinyDate.Occurrence.Second).ToList();
+
+            CollectionAssert.AreEquivalent(expectedDates, result);
         }
     }
 }

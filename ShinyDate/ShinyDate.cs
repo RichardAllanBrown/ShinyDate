@@ -198,5 +198,23 @@ namespace ShinyDate
 
             return false;
         }
+
+        public static bool IsOccurrenceOf(this DateTime date, DayOfWeek day, Occurrence occurrence)
+        {
+            if (day != date.DayOfWeek)
+            {
+                return false;
+            }
+
+            try
+            {
+                var compare = date.AddMonths(-1).GetOccurrenceOfNextMonth(day, occurrence);
+                return compare.Date == date.Date;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

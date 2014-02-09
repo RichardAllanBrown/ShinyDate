@@ -32,5 +32,10 @@ namespace ShinyDate.Collections
         {
             return GetAllDaysBetween(from, to).Where(x => x.DayOfWeek == day);
         }
+
+        public static IEnumerable<DateTime> GetAllOccurrences(DateTime from, DateTime to, DayOfWeek day, Occurrence occurrence)
+        {
+            return GetAllDayOfWeek(from, to, day).Where(x => x.IsOccurrenceOf(day, occurrence));
+        }
     }
 }
