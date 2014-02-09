@@ -6,8 +6,40 @@ using System.Threading.Tasks;
 
 namespace ShinyDate
 {
+    public enum MonthOfYear
+    {
+        January = 1,
+        February = 2,
+        March = 3,
+        April = 4,
+        May = 5,
+        June = 6,
+        July = 7,
+        August = 8,
+        September = 9,
+        October = 10,
+        November = 11,
+        December = 12
+    }
+
+    public enum Occurance
+    {
+        FifthFromLast = -5,
+        ForthFromLast = -4,
+        ThirdFromLast = -3,
+        SecondFromLast = -2,
+        Last = -1,
+        First = 1,
+        Second = 2,
+        Third = 3,
+        Forth = 4,
+        Fifth = 5,
+    }
+
     public static class ShinyDateExtentions
     {
+        private static int DAYS_IN_WEEK = 7;
+
         public static DateTime GetTomorrow(this DateTime from)
         {
             return from.AddDays(1);
@@ -31,6 +63,11 @@ namespace ShinyDate
             return from.AddDays(daysUntilNext);
         }
 
+        public static DateTime GetNextWorkingDay(this DateTime from)
+        {
+            return from.AddWorkingDays(1);
+        }
+
         public static DateTime GetPrevious(this DateTime from, DayOfWeek day)
         {
             int daysToSubtract = -7;
@@ -41,6 +78,11 @@ namespace ShinyDate
             }
 
             return from.GetNext(day).AddDays(daysToSubtract);
+        }
+
+        public static DateTime GetPreviousWorkingDay(this DateTime from)
+        {
+            return from.AddWorkingDays(-1);
         }
 
         public static DateTime GetFirstOfNextMonth(this DateTime from)
@@ -58,6 +100,33 @@ namespace ShinyDate
             }
 
             return firstOfNextMonth.GetNext(day);
+        }
+
+        public static DateTime GetOccuranceOfNextMonth(this DateTime from, DayOfWeek day, Occurance occurance)
+        {
+            DateTime relevantMonthEnd;
+
+            if (occurance > 0)
+            {
+                relevantMonthEnd = from.GetFirstOfNextMonth(day);
+                occurance -= 1;
+            }
+            else
+            {
+                relevantMonthEnd = from.GetLastOfNextMonth(day);
+                occurance += 1;
+            }
+
+            MonthOfYear monthToScan = relevantMonthEnd.MonthOfYear();
+            DateTime foundDate = relevantMonthEnd.AddWeeks((int)occurance);
+
+            if (foundDate.MonthOfYear() == monthToScan)
+            {
+                return foundDate;
+            }
+
+            string errorMessage = String.Format("Cannot get the {0} {1} of {2}", occurance, day, monthToScan);
+            throw new ArgumentOutOfRangeException(errorMessage);
         }
 
         public static DateTime GetFirstWorkingDayOfNextMonth(this DateTime from)
@@ -98,7 +167,7 @@ namespace ShinyDate
                 return lastOfNextMonth;
             }
 
-            return lastOfNextMonth.SubtractWorkingDays(1);
+            return lastOfNextMonth.GetPreviousWorkingDay();
         }
 
         public static DateTime AddWorkingDays(this DateTime from, int daysToAdd)
@@ -119,9 +188,9 @@ namespace ShinyDate
             return from;
         }
 
-        public static DateTime SubtractWorkingDays(this DateTime from, int daysToSubtract)
+        public static DateTime AddWeeks(this DateTime from, int weeksToAdd)
         {
-            return from.AddWorkingDays(-daysToSubtract);
+            return from.AddDays(weeksToAdd * DAYS_IN_WEEK);
         }
 
         public static MonthOfYear MonthOfYear(this DateTime of)

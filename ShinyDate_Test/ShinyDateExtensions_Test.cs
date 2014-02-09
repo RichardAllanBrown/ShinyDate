@@ -59,6 +59,22 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
+        public void GetNextWorkingDay_MidWeek()
+        {
+            var result = new DateTime(2014, 2, 5).GetNextWorkingDay();
+
+            Assert.AreEqual(new DateTime(2014, 2, 6), result);
+        }
+
+        [TestMethod]
+        public void GetNextWorkignDay_Weekend()
+        {
+            var result = new DateTime(2014, 2, 8).GetNextWorkingDay();
+
+            Assert.AreEqual(new DateTime(2014, 2, 10), result);
+        }
+
+        [TestMethod]
         public void GetPreviousSpecificDayOfWeek_SameDay()
         {
             DateTime testDate = new DateTime(2014, 2, 7);
@@ -104,6 +120,36 @@ namespace ShinyDate_Test
             var result = new DateTime(2014, 2, 8).GetFirstOfNextMonth(DayOfWeek.Saturday);
 
             Assert.AreEqual(new DateTime(2014, 3, 1), result);
+        }
+
+        [TestMethod]
+        public void GetOccuranceOfNextMonth_WithinRange_LookingForward()
+        {
+            var result = new DateTime(2014, 2, 8).GetOccuranceOfNextMonth(DayOfWeek.Tuesday, Occurance.Third);
+
+            Assert.AreEqual(new DateTime(2014, 3, 18), result);
+        }
+
+        [TestMethod]
+        public void GetOccuranceOfNextMonth_WithinRange_LookingBackward()
+        {
+            var result = new DateTime(2014, 2, 8).GetOccuranceOfNextMonth(DayOfWeek.Friday, Occurance.SecondFromLast);
+
+            Assert.AreEqual(new DateTime(2014, 3, 21), result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetOccuranceOfNextMonth_OutsideRangeForward_ThrowsException()
+        {
+            var result = new DateTime(2014, 1, 20).GetOccuranceOfNextMonth(DayOfWeek.Sunday, Occurance.Fifth);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetOccuranceOfNextMonth_OutsideRangeBackward_ThrowsException()
+        {
+            var result = new DateTime(2014, 1, 20).GetOccuranceOfNextMonth(DayOfWeek.Sunday, Occurance.FifthFromLast);
         }
 
         [TestMethod]
@@ -189,13 +235,11 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
-        public void SubtractWorkingDays_MultipleDays()
+        public void AddWeeks_PositiveNumber()
         {
-            DateTime testDate = new DateTime(2014, 2, 8);
+            var result = new DateTime(2013, 2, 8).AddWeeks(4);
 
-            var result = testDate.SubtractWorkingDays(12);
-
-            Assert.AreEqual(new DateTime(2014, 1, 23), result);
+            Assert.AreEqual(new DateTime(2013, 3, 8), result);
         }
 
         [TestMethod]
