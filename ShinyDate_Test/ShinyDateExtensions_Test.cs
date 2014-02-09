@@ -123,33 +123,33 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
-        public void GetOccuranceOfNextMonth_WithinRange_LookingForward()
+        public void GetOccurrenceOfNextMonth_WithinRange_LookingForward()
         {
-            var result = new DateTime(2014, 2, 8).GetOccuranceOfNextMonth(DayOfWeek.Tuesday, Occurance.Third);
+            var result = new DateTime(2014, 2, 8).GetOccurrenceOfNextMonth(DayOfWeek.Tuesday, Occurrence.Third);
 
             Assert.AreEqual(new DateTime(2014, 3, 18), result);
         }
 
         [TestMethod]
-        public void GetOccuranceOfNextMonth_WithinRange_LookingBackward()
+        public void GetOccurrenceOfNextMonth_WithinRange_LookingBackward()
         {
-            var result = new DateTime(2014, 2, 8).GetOccuranceOfNextMonth(DayOfWeek.Friday, Occurance.SecondFromLast);
+            var result = new DateTime(2014, 2, 8).GetOccurrenceOfNextMonth(DayOfWeek.Friday, Occurrence.SecondFromLast);
 
             Assert.AreEqual(new DateTime(2014, 3, 21), result);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetOccuranceOfNextMonth_OutsideRangeForward_ThrowsException()
+        public void GetOccurrenceOfNextMonth_OutsideRangeForward_ThrowsException()
         {
-            var result = new DateTime(2014, 1, 20).GetOccuranceOfNextMonth(DayOfWeek.Sunday, Occurance.Fifth);
+            var result = new DateTime(2014, 1, 20).GetOccurrenceOfNextMonth(DayOfWeek.Sunday, Occurrence.Fifth);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetOccuranceOfNextMonth_OutsideRangeBackward_ThrowsException()
+        public void GetOccurrenceOfNextMonth_OutsideRangeBackward_ThrowsException()
         {
-            var result = new DateTime(2014, 1, 20).GetOccuranceOfNextMonth(DayOfWeek.Sunday, Occurance.FifthFromLast);
+            var result = new DateTime(2014, 1, 20).GetOccurrenceOfNextMonth(DayOfWeek.Sunday, Occurrence.FifthFromLast);
         }
 
         [TestMethod]

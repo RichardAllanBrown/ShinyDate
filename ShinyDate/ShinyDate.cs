@@ -22,7 +22,7 @@ namespace ShinyDate
         December = 12
     }
 
-    public enum Occurance
+    public enum Occurrence
     {
         FifthFromLast = -5,
         ForthFromLast = -4,
@@ -102,7 +102,7 @@ namespace ShinyDate
             return firstOfNextMonth.GetNext(day);
         }
 
-        public static DateTime GetOccuranceOfNextMonth(this DateTime from, DayOfWeek day, Occurance occurance)
+        public static DateTime GetOccurrenceOfNextMonth(this DateTime from, DayOfWeek day, Occurrence occurance)
         {
             DateTime relevantMonthEnd;
 
