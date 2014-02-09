@@ -63,11 +63,6 @@ namespace ShinyDate
             return from.AddDays(daysUntilNext);
         }
 
-        public static DateTime GetNextWorkingDay(this DateTime from)
-        {
-            return from.AddWorkingDays(1);
-        }
-
         public static DateTime GetPrevious(this DateTime from, DayOfWeek day)
         {
             int daysToSubtract = -7;
@@ -78,12 +73,7 @@ namespace ShinyDate
             }
 
             return from.GetNext(day).AddDays(daysToSubtract);
-        }
-
-        public static DateTime GetPreviousWorkingDay(this DateTime from)
-        {
-            return from.AddWorkingDays(-1);
-        }
+        }  
 
         public static DateTime GetFirstOfNextMonth(this DateTime from)
         {
@@ -129,18 +119,6 @@ namespace ShinyDate
             throw new ArgumentOutOfRangeException(errorMessage);
         }
 
-        public static DateTime GetFirstWorkingDayOfNextMonth(this DateTime from)
-        {
-            var firstOfNextMonth = from.GetFirstOfNextMonth();
-
-            if (firstOfNextMonth.IsWeekday())
-            {
-                return firstOfNextMonth;
-            }
-
-            return firstOfNextMonth.AddWorkingDays(1);
-        }
-
         public static DateTime GetLastOfNextMonth(this DateTime from)
         {
             return from.AddMonths(2).AddDays(-from.Day);
@@ -158,36 +136,6 @@ namespace ShinyDate
             return lastDayOfNextMonth.GetPrevious(day);
         }
 
-        public static DateTime GetLastWorkingDayOfNextMonth(this DateTime from)
-        {
-            var lastOfNextMonth = from.GetLastOfNextMonth();
-
-            if (lastOfNextMonth.IsWeekday())
-            {
-                return lastOfNextMonth;
-            }
-
-            return lastOfNextMonth.GetPreviousWorkingDay();
-        }
-
-        public static DateTime AddWorkingDays(this DateTime from, int daysToAdd)
-        {
-            var temporalDirection = Math.Sign(daysToAdd);
-            var workingDays = Math.Abs(daysToAdd);
-
-            while (0 < workingDays)
-            {
-                from = from.AddDays(temporalDirection);
-
-                if (from.IsWeekday())
-                {
-                    workingDays -= 1;
-                }
-            }
-
-            return from;
-        }
-
         public static DateTime AddWeeks(this DateTime from, int weeksToAdd)
         {
             return from.AddDays(weeksToAdd * DAYS_IN_WEEK);
@@ -196,16 +144,6 @@ namespace ShinyDate
         public static MonthOfYear MonthOfYear(this DateTime of)
         {
             return (MonthOfYear)of.Month;
-        }
-
-        public static bool IsWeekend(this DateTime dateToCheck)
-        {
-            return dateToCheck.DayOfWeek == DayOfWeek.Saturday || dateToCheck.DayOfWeek == DayOfWeek.Sunday;
-        }
-
-        public static bool IsWeekday(this DateTime dateToCheck)
-        {
-            return !dateToCheck.IsWeekend();
         }
     }
 }

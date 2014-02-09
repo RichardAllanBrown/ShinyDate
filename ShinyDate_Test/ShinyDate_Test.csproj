@@ -50,7 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ShinyDateExtensions_Test.cs" />
+    <Compile Include="ShinyDateWorkingDays_Test.cs" />
+    <Compile Include="ShinyDate_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShinyDateCollections_Test.cs" />
   </ItemGroup>

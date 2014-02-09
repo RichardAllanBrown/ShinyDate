@@ -6,7 +6,7 @@ using ShinyDate;
 namespace ShinyDate_Test
 {
     [TestClass]
-    public class ShinyDateExtensions_Test
+    public class ShinyDate_Test
     {
         [TestMethod]
         public void GetNextDay()
@@ -56,22 +56,6 @@ namespace ShinyDate_Test
             var result = testDate.GetNext(DayOfWeek.Saturday);
 
             Assert.AreEqual(new DateTime(2014, 2, 8), result);
-        }
-
-        [TestMethod]
-        public void GetNextWorkingDay_MidWeek()
-        {
-            var result = new DateTime(2014, 2, 5).GetNextWorkingDay();
-
-            Assert.AreEqual(new DateTime(2014, 2, 6), result);
-        }
-
-        [TestMethod]
-        public void GetNextWorkignDay_Weekend()
-        {
-            var result = new DateTime(2014, 2, 8).GetNextWorkingDay();
-
-            Assert.AreEqual(new DateTime(2014, 2, 10), result);
         }
 
         [TestMethod]
@@ -153,22 +137,6 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
-        public void GetFirstWorkingDayOfNextMonth_FirstDayIsNotWorkingDay()
-        {
-            var result = new DateTime(2014, 2, 8).GetFirstWorkingDayOfNextMonth();
-
-            Assert.AreEqual(new DateTime(2014, 3, 3), result);
-        }
-
-        [TestMethod]
-        public void GetFirstWorkingDayOfNextMonth_FirstDayIsWorkingDay()
-        {
-            var result = new DateTime(2014, 3, 8).GetFirstWorkingDayOfNextMonth();
-
-            Assert.AreEqual(new DateTime(2014, 4, 1), result);
-        }
-
-        [TestMethod]
         public void GetLastOfNextMonth()
         {
             DateTime testDate = new DateTime(2014, 2, 8);
@@ -199,42 +167,6 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
-        public void GetLastWorkingDayOfMonth_LastIsWorkingDay()
-        {
-            var result = new DateTime(2014, 2, 8).GetLastWorkingDayOfNextMonth();
-
-            Assert.AreEqual(new DateTime(2014, 3, 31), result);
-        }
-
-        [TestMethod]
-        public void GetLastWorkingDayOfMonth_LastIsNotWorkingDay()
-        {
-            var result = new DateTime(2014, 4, 8).GetLastWorkingDayOfNextMonth();
-
-            Assert.AreEqual(new DateTime(2014, 5, 30), result);
-        }
-
-        [TestMethod]
-        public void AddWorkingDays_ZeroDays()
-        {
-            DateTime testDate = new DateTime(2014, 2, 8);
-
-            var result = testDate.AddWorkingDays(0);
-
-            Assert.AreEqual(testDate, result);
-        }
-
-        [TestMethod]
-        public void AddWorkingDays_MultipleDays()
-        {
-            DateTime testDate = new DateTime(2014, 2, 8);
-
-            var result = testDate.AddWorkingDays(25);
-
-            Assert.AreEqual(new DateTime(2014, 3, 14), result);
-        }
-
-        [TestMethod]
         public void AddWeeks_PositiveNumber()
         {
             var result = new DateTime(2013, 2, 8).AddWeeks(4);
@@ -252,24 +184,6 @@ namespace ShinyDate_Test
         public void GetMonthOfYear_Dec()
         {
             Assert.AreEqual(MonthOfYear.December, new DateTime(2014, 12, 25).MonthOfYear());
-        }
-
-        [TestMethod]
-        public void CheckIfDateIsWeekend()
-        {
-            Assert.IsTrue(new DateTime(2014, 2, 8).IsWeekend());
-            Assert.IsTrue(new DateTime(2014, 2, 9).IsWeekend());
-            Assert.IsFalse(new DateTime(2014, 2, 10).IsWeekend());
-            Assert.IsFalse(new DateTime(2014, 2, 7).IsWeekend());
-        }
-
-        [TestMethod]
-        public void CheckIfDateIsWeekday()
-        {
-            Assert.IsFalse(new DateTime(2014, 2, 8).IsWeekday());
-            Assert.IsFalse(new DateTime(2014, 2, 9).IsWeekday());
-            Assert.IsTrue(new DateTime(2014, 2, 10).IsWeekday());
-            Assert.IsTrue(new DateTime(2014, 2, 7).IsWeekday());
         }
     }
 }
