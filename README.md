@@ -3,8 +3,11 @@ ShinyDate
 
 A nice shiny DateTime library of functions for C# .NET
 
-Contains ShinyDate, a simple set of extention methods that help caclulate dates
-```
+ShinyDate Namespace
+-------------------
+A simple set of extention methods that help caclulate dates
+
+```C#
 //ShinyDate
 DateTime tomorrow = DateTime.Today.Tomorrow();
 DateTime yesterday = DateTime.Today.Yesterday();
@@ -30,8 +33,11 @@ bool IsLeapYear = DateTime.Today.IsInLeapYear();
 bool IsTodayFirstMonday = DateTime.Today.IsOccurrenceOf(DayOfWeek.Monday, Occurrence.First);
 ```
 
-ShinyDate.WorkingDays for caclulations around working days (working days assumed to be Mon-Fri)
-```
+ShinyDate.WorkingDays Namespace
+-------------------------------
+For caclulations around working days (working days assumed to be Mon-Fri)
+
+```C#
 //ShinyDateWorkingDays
 DateTime nextWorkingDay = DateTime.Today.GetNextWorkingDay();
 DateTime previousWorkingDay = DateTime.Today.GetPreviousWorkingDay();
@@ -45,8 +51,10 @@ bool isWorkingDay = DateTime.Today.IsWorkday();
 bool isNotWorkingDay = DateTime.Today.IsNotWorkday();
 ```
 
-ShinyDate.Collections for enumerations of days
-```
+ShinyDate.Collections
+---------------------
+
+```C#
 //ShinyDateCollections
 var daysFeb = ShinyDateCollections.GetAllDaysBetween(new DateTime(2014, 2, 1), new DateTime(2014, 2, 28))
 var workingDaysFeb = ShinyDateCollections.GetAllWorkingDaysBetween(new DateTime(2014, 2, 1), new DateTime(2014, 2, 28))
