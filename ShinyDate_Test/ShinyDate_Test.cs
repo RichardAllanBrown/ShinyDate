@@ -167,6 +167,54 @@ namespace ShinyDate_Test
         }
 
         [TestMethod]
+        public void GetNearest_IsToday()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearest(DayOfWeek.Saturday);
+
+            Assert.AreEqual(new DateTime(2014, 2, 8), result);
+        }
+
+        [TestMethod]
+        public void GetNearest_InFuture()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearest(DayOfWeek.Sunday);
+
+            Assert.AreEqual(new DateTime(2014, 2, 9), result);
+        }
+
+        [TestMethod]
+        public void GetNearest_InPast()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearest(DayOfWeek.Thursday);
+
+            Assert.AreEqual(new DateTime(2014, 2, 6), result);
+        }
+
+        [TestMethod]
+        public void GetNearestOccurrence_IsToday()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Saturday, Occurrence.Second);
+
+            Assert.AreEqual(new DateTime(2014, 2, 8), result);
+        }
+
+        [TestMethod]
+        public void GetNearestOccurrence_InFuture()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Tuesday, Occurrence.Second);
+
+            Assert.AreEqual(new DateTime(2014, 2, 11), result);
+        }
+
+        [TestMethod]
+        public void GetNearestOccurrence_InPast()
+        {
+            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Tuesday, Occurrence.First);
+
+            Assert.AreEqual(new DateTime(2014, 2, 4), result);
+        }
+
+        [TestMethod]
         public void AddWeeks_PositiveNumber()
         {
             var result = new DateTime(2013, 2, 8).AddWeeks(4);
@@ -184,6 +232,30 @@ namespace ShinyDate_Test
         public void GetMonthOfYear_Dec()
         {
             Assert.AreEqual(MonthOfYear.December, new DateTime(2014, 12, 25).MonthOfYear());
+        }
+
+        [TestMethod]
+        public void IsInLeapYear_NotDivisibleBy4()
+        {
+            Assert.IsFalse(new DateTime(2014, 2, 4).IsInLeapYear());
+        }
+
+        [TestMethod]
+        public void IsInLeapYear_DivisibleBy4NotBy100()
+        {
+            Assert.IsTrue(new DateTime(2004, 2, 4).IsInLeapYear());
+        }
+
+        [TestMethod]
+        public void IsInLeapYear_DivisibleBy4And100And400()
+        {
+            Assert.IsTrue(new DateTime(2000, 2, 4).IsInLeapYear());
+        }
+
+        [TestMethod]
+        public void IsInLeapYear_DivisibleBy4And100NotBy400()
+        {
+            Assert.IsFalse(new DateTime(2100, 2, 4).IsInLeapYear());
         }
     }
 }

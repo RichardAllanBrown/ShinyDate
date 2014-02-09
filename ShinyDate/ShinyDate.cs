@@ -92,30 +92,30 @@ namespace ShinyDate
             return firstOfNextMonth.GetNext(day);
         }
 
-        public static DateTime GetOccurrenceOfNextMonth(this DateTime from, DayOfWeek day, Occurrence occurance)
+        public static DateTime GetOccurrenceOfNextMonth(this DateTime from, DayOfWeek day, Occurrence occurrence)
         {
             DateTime relevantMonthEnd;
 
-            if (occurance > 0)
+            if (occurrence > 0)
             {
                 relevantMonthEnd = from.GetFirstOfNextMonth(day);
-                occurance -= 1;
+                occurrence -= 1;
             }
             else
             {
                 relevantMonthEnd = from.GetLastOfNextMonth(day);
-                occurance += 1;
+                occurrence += 1;
             }
 
             MonthOfYear monthToScan = relevantMonthEnd.MonthOfYear();
-            DateTime foundDate = relevantMonthEnd.AddWeeks((int)occurance);
+            DateTime foundDate = relevantMonthEnd.AddWeeks((int)occurrence);
 
             if (foundDate.MonthOfYear() == monthToScan)
             {
                 return foundDate;
             }
 
-            string errorMessage = String.Format("Cannot get the {0} {1} of {2}", occurance, day, monthToScan);
+            string errorMessage = String.Format("Cannot get the {0} {1} of {2}", occurrence, day, monthToScan);
             throw new ArgumentOutOfRangeException(errorMessage);
         }
 
@@ -136,7 +136,38 @@ namespace ShinyDate
             return lastDayOfNextMonth.GetPrevious(day);
         }
 
-        public static DateTime AddWeeks(this DateTime from, int weeksToAdd)
+        public static DateTime GetNearest(this DateTime from, DayOfWeek day)
+        {
+            if (from.DayOfWeek == day)
+            {
+                return from;
+            }
+
+            var nextSuitableDate = from.GetNext(day);
+            var previousSuitableDate = from.GetPrevious(day);
+
+            return CalculateClosest(previousSuitableDate, from, nextSuitableDate);
+        }
+
+        private static DateTime CalculateClosest(DateTime pastMatchDate, DateTime comparator, DateTime futureMatchDate)
+        {
+            if (futureMatchDate - comparator > comparator - pastMatchDate)
+            {
+                return pastMatchDate;
+            }
+
+            return futureMatchDate;
+        }
+
+        public static DateTime GetNearestOccurance(this DateTime from, DayOfWeek day, Occurrence occurrence)
+        {
+            var nextSuitableDate = from.GetOccurrenceOfNextMonth(day, occurrence);
+            var previousSuitableDate = from.AddMonths(-1).GetOccurrenceOfNextMonth(day, occurrence);
+
+            return CalculateClosest(previousSuitableDate, from, nextSuitableDate);
+        }
+
+        public static DateTime AddWeeks(this DateTime from, double weeksToAdd)
         {
             return from.AddDays(weeksToAdd * DAYS_IN_WEEK);
         }
@@ -144,6 +175,28 @@ namespace ShinyDate
         public static MonthOfYear MonthOfYear(this DateTime of)
         {
             return (MonthOfYear)of.Month;
+        }
+
+        public static bool IsInLeapYear(this DateTime date)
+        {
+            int year = date.Year;
+
+            if (year % 4 != 0)
+            {
+                return false;
+            }
+
+            if (year % 100 != 0)
+            {
+                return true;
+            }
+
+            if (year % 400 == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
