@@ -3,8 +3,8 @@ ShinyDate
 
 A nice shiny DateTime library of functions for C# .NET
 
-ShinyDate Namespace
--------------------
+ShinyDate
+---------
 A simple set of extention methods that help caclulate dates
 
 ```C#
@@ -33,8 +33,8 @@ bool IsLeapYear = DateTime.Today.IsInLeapYear();
 bool IsTodayFirstMonday = DateTime.Today.IsOccurrenceOf(DayOfWeek.Monday, Occurrence.First);
 ```
 
-ShinyDate.WorkingDays Namespace
--------------------------------
+ShinyDate.WorkingDays
+---------------------
 For caclulations around working days (working days assumed to be Mon-Fri)
 
 ```C#
