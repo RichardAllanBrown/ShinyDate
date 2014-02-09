@@ -193,7 +193,7 @@ namespace ShinyDate_Test
         [TestMethod]
         public void GetNearestOccurrence_IsToday()
         {
-            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Saturday, Occurrence.Second);
+            var result = new DateTime(2014, 2, 8).GetNearestOccurrence(DayOfWeek.Saturday, Occurrence.Second);
 
             Assert.AreEqual(new DateTime(2014, 2, 8), result);
         }
@@ -201,7 +201,7 @@ namespace ShinyDate_Test
         [TestMethod]
         public void GetNearestOccurrence_InFuture()
         {
-            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Tuesday, Occurrence.Second);
+            var result = new DateTime(2014, 2, 8).GetNearestOccurrence(DayOfWeek.Tuesday, Occurrence.Second);
 
             Assert.AreEqual(new DateTime(2014, 2, 11), result);
         }
@@ -209,7 +209,7 @@ namespace ShinyDate_Test
         [TestMethod]
         public void GetNearestOccurrence_InPast()
         {
-            var result = new DateTime(2014, 2, 8).GetNearestOccurance(DayOfWeek.Tuesday, Occurrence.First);
+            var result = new DateTime(2014, 2, 8).GetNearestOccurrence(DayOfWeek.Tuesday, Occurrence.First);
 
             Assert.AreEqual(new DateTime(2014, 2, 4), result);
         }

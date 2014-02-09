@@ -159,7 +159,7 @@ namespace ShinyDate
             return futureMatchDate;
         }
 
-        public static DateTime GetNearestOccurance(this DateTime from, DayOfWeek day, Occurrence occurrence)
+        public static DateTime GetNearestOccurrence(this DateTime from, DayOfWeek day, Occurrence occurrence)
         {
             var nextSuitableDate = from.GetOccurrenceOfNextMonth(day, occurrence);
             var previousSuitableDate = from.AddMonths(-1).GetOccurrenceOfNextMonth(day, occurrence);
